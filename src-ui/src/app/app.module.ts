@@ -60,6 +60,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NumberComponent } from './components/common/input/number/number.component';
 import { SafePipe } from './pipes/safe.pipe';
 import { CustomDatePipe } from './pipes/custom-date.pipe';
+import { HotkeyModule } from 'angular2-hotkeys';
 
 import localeFr from '@angular/common/locales/fr';
 import localeNl from '@angular/common/locales/nl';
@@ -132,7 +133,8 @@ registerLocaleData(localeEnGb)
     NgxFileDropModule,
     InfiniteScrollModule,
     PdfViewerModule,
-    NgSelectModule
+    NgSelectModule,
+    HotkeyModule.forRoot()
   ],
   providers: [
     DatePipe,
