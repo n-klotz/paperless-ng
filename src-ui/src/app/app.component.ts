@@ -21,6 +21,12 @@ export class AppComponent implements OnInit, OnDestroy {
     anyWindow.pdfWorkerSrc = '/assets/js/pdf.worker.min.js';
     this.settings.updateDarkModeSettings()
 
+    // Hotkey <shift> + <f> : activate search 
+    this._hotkeysService.add(new Hotkey('shift+f', (event: KeyboardEvent): boolean => {
+      document.getElementById("hotkeySearch").focus();
+      return false; // Prevent bubbling
+    }, undefined, 'Search the document library.'));
+
     // Hotkey <shift> + <d> : go to documents view 
     this._hotkeysService.add(new Hotkey('shift+d', (event: KeyboardEvent): boolean => {
       this.router.navigate(['documents']);
