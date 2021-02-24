@@ -16,10 +16,28 @@ export class AppComponent implements OnInit, OnDestroy {
   successSubscription: Subscription;
   failedSubscription: Subscription;
 
-  constructor (private settings: SettingsService, private consumerStatusService: ConsumerStatusService, private toastService: ToastService, private router: Router) {
+  constructor (private settings: SettingsService, private consumerStatusService: ConsumerStatusService, private toastService: ToastService, private router: Router, private _hotkeysService: HotkeysService) {
     let anyWindow = (window as any)
     anyWindow.pdfWorkerSrc = '/assets/js/pdf.worker.min.js';
     this.settings.updateDarkModeSettings()
+
+    // Hotkey <shift> + <d> : go to documents view 
+    this._hotkeysService.add(new Hotkey('shift+d', (event: KeyboardEvent): boolean => {
+      this.router.navigate(['documents']);
+      return false; // Prevent bubbling
+    }, undefined, 'Show document library.'));
+
+    // Hotkey <shift> + <c> : go to correspondents view 
+    this._hotkeysService.add(new Hotkey('shift+c', (event: KeyboardEvent): boolean => {
+      this.router.navigate(['correspondents']);
+      return false; // Prevent bubbling
+    }, undefined, 'Show correspondents.'));
+
+    // Hotkey <shift> + <y> : go to documenttype view 
+    this._hotkeysService.add(new Hotkey('shift+y', (event: KeyboardEvent): boolean => {
+      this.router.navigate(['documenttypes']);
+      return false; // Prevent bubbling
+    }, undefined, 'Show document types.'));
   }
 
   ngOnDestroy(): void {
